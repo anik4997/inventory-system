@@ -13,5 +13,5 @@
 <p>{{ $p->name }} | Stock: {{ $p->stock }}</p>
 @endforeach
 
-<a href="/sale/create">Make Sale</a>
+<a href="{{ route('sale.create') }}">Make Sale</a>
 <a href="/report">Report</a>

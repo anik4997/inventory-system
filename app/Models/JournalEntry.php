@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class JournalEntry extends Model
 {
-    //
+    protected $fillable = ['date','account_name','debit','credit','reference_type','reference_id'];
 }
