@@ -14,4 +14,4 @@
 @endforeach
 
 <a href="{{ route('sale.create') }}">Make Sale</a>
-<a href="/report">Report</a>
+<a href="{{ route('report.index') }}">Report</a>
