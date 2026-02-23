@@ -18,6 +18,13 @@ class SaleController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+            'discount' => 'nullable|numeric|min:0',
+            'paid_amount' => 'required|numeric|min:0',
+        ]);
+        
         DB::beginTransaction();
 
         try {
