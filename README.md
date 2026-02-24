@@ -1,59 +1,122 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Inventory Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple Inventory Management System with accounting journal entries and date-wise financial reporting, built with Laravel.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🔹 Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Add Products with:
+  - Name
+  - Purchase Price
+  - Sell Price
+  - Stock
+- Make Sales with:
+  - Quantity
+  - Discount
+  - VAT (5%)
+  - Partial or Full Payment
+- Automatic Journal Entries for every sale:
+  - Accounts Receivable
+  - Sales Revenue
+  - VAT Payable
+  - Cash
+- Date-wise Financial Report:
+  - Total Sell
+  - Total Expense
+  - Filter by date range
+- Atomic transaction support (no partial sale in DB)
+- Bootstrap frontend with validation messages
+- Deployment-ready
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🔹 Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Requirements
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP >= 8.1
+- Composer
+- MySQL or MariaDB
+- Web server (Apache/Nginx/WAMP/XAMPP)
 
-## Laravel Sponsors
+### Steps
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. Clone the repository:
 
-### Premium Partners
+```bash
+git clone inventory-system
+cd inventory-system
+```
+2. Install dependencies:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+composer install
+```
+3. Copy .env.example to .env and configure your database:
 
-## Contributing
+```bash
+cp .env.example .env
+```
+4. Edit .env:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=inventory_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+5. Generate application key:
 
-## Code of Conduct
+```bash
+php artisan key:generate
+```
+6. Run migrations:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan migrate
+```
+7. Serve the application:
 
-## Security Vulnerabilities
+```bash
+php artisan serve
+```
+### Usage
+## Product Management
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Go to / (home page)
+- Add products with Name, Purchase Price, Sell Price, Stock
+- View existing products
 
-## License
+## Make Sale
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Click Make Sale button
+- Select product, enter quantity, discount, and paid amount
+- Sale is saved, stock reduced, and journal entries automatically created
+
+## Financial Report
+
+- Click Report button
+- Select date range to filter sales
+
+## Journal Entries
+
+- Click Journal Entries button
+- View all debit/credit entries generated automatically for sales
+
+### Example Sale Calculation
+
+- Product Sell Price: 200 TK
+- Quantity Sold: 10
+- Discount: 50 TK
+- VAT: 5%
+
+## Calculation:
+
+- Gross Sale: 10 × 200 = 2000 TK
+- After Discount: 2000 - 50 = 1950 TK
+- VAT: 1950 × 5% = 97.5 TK
+- Total Amount: 1950 + 97.5 = 2047.5 TK
+- Customer Paid: 1000 TK → Due = 1047.5 TK
