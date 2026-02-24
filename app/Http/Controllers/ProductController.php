@@ -15,7 +15,15 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'purchase_price' => 'required|numeric|min:0',
+            'sell_price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+        ]);
+
         Product::create($request->all());
-        return back();
+
+        return back()->with('success', 'Product added successfully!');
     }
 }

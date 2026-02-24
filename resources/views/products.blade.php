@@ -87,6 +87,7 @@
             <div class="mt-4">
                 <a href="{{ route('sale.create') }}" class="btn btn-success">Make Sale</a>
                 <a href="{{ route('report.index') }}" class="btn btn-info text-white">Financial Report</a>
+                <a href="{{ route('journal.index') }}" class="btn btn-info">Journal Entries</a>
             </div>
         </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
